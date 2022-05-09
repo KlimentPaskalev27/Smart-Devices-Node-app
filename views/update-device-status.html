@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <title>Update device</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <meta name="author" content="SmartHome Ltd.">
+    <script type="text/javascript" src="js/form.js"></script>
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/add-device">Add device</a></li>
+            <li><a href="/show-device-status">Device status</a></li>
+            <li><a href="/update-device-status">Update device</a></li>
+            <li><a href="/delete-device">Delete device</a></li>
+            <li><a href="/list">View devices</a></li>
+            <li><a href="/search">Search</a></li>
+        </ul>
+    </nav>
+    <H1>Update device</H1>
+    <% if (availableDevices.length != 0) { %>
+        <H3>Select a device from the list below to update:</H3>
+        <form action="/update" method="GET">
+            <table>
+                <tr>
+                    <th>Select</th>
+                    <th>Name</th>
+                </tr>
+                <% availableDevices.forEach(function(device){ %>
+                <tr>
+                    <td>
+                        <input type="radio" name="keyword" value="<%= device.name %>">
+                    </td>
+                    <td>
+
+                        <label for="keyword"><%= device.name %></label>
+                    </td>
+                </tr>
+                <% }) %>
+            </table>
+            <br>
+            <input class="submit" type="submit" value="Update">
+            <br>
+        </form>
+    <% } else { %>
+        <h2>No devices have been added yet.</h2>
+    <% } %>
+    <a class="button" href="/add-device"><button>Add new device</button></a>
+    <section class="footer-dark">
+        <footer>
+            <div class="container">
+                <h4>SmartHome Ltd.</h4>
+                <p class="copyright">Kliment Paskalev © 2022</p>
+            </div>
+        </footer>
+    </section>
+</body>
+</html>

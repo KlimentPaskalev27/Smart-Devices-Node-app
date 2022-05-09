@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript" src="js/form.js"></script>
+    <meta name="author" content="SmartHome Ltd.">
+    <meta name="description" content="<%= descr %>">
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/add-device">Add device</a></li>
+            <li><a href="/show-device-status">Device status</a></li>
+            <li><a href="/update-device-status">Update device</a></li>
+            <li><a href="/delete-device">Delete device</a></li>
+            <li><a href="/list">View devices</a></li>
+            <li><a href="/search">Search</a></li>
+        </ul>
+    </nav>
+    <h1>Add a new Device</h1>
+    <form action="/device-added" method="POST">
+        <div>
+            <label class="namelabel" for="name" >Choose a device: </label>
+            <div id="result"></div>
+            <div class="dropdown">
+                <a onclick="openDropdown()" id ="dropbtn" class="dropbtn">Toggle Dropdown</a>
+                <div id="myDropdown" class="dropdown-content">
+                    <!-- inject the result variable into a javascript var -->
+                    <% options.forEach(function(device){ %>
+                    <div>
+                        <label for="<%= device %>"><%= device %></label>
+                        <input type="radio" name="name" value="<%= device %>" onclick="displayRadioValue()">
+                    </div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div id="on_off" class="hide">
+            <label for="On_Off">On / Off </label>
+            <div>
+                <label for="On_Off">Turn On.</label>
+                <input name="On_Off" type="radio" value="1"  />
+                <label for="On_Off">Turn Off.</label>
+                <input name="On_Off" type="radio" value="0" checked="checked" />
+            </div>
+        </div>
+        <br>
+        <div id="open_close" class="hide">
+            <label for="Open_Close">Open / Close </label>
+            <div>
+                <label for="Open_Close">Open</label>
+                <input name="Open_Close" type="radio" value="Opened" />
+                <label for="Open_Close">Close</label>
+                <input name="Open_Close" type="radio" value="Closed" />
+                <input class="hide" id="open_na" name="Open_Close" type="radio" value="Not applicable"/>
+            </div>
+        </div>
+        <br>
+        <div id="temprt" class="hide">
+            <label for="temperature">Temperature &#8451;</label>
+            <input id="temperatur" type="range" name="temperatur" value="" min="0" step="0.5" max="100" oninput="this.nextElementSibling.value = this.value ; this.nextElementSibling.nextElementSibling.value = this.value + '&#8451;'">
+            <input class="hide" id="temperature" type="text" name="temperature" value="Not applicable">
+            <output>Temperature</output>
+        </div>
+        <br>
+        <div id="volumediv" class="hide">
+            <label for="volume">Volume </label>
+            <input id="volum" type="range" name="volum" value="" min="0" max="100" step="1" oninput="this.nextElementSibling.value = this.value ; this.nextElementSibling.nextElementSibling.value = this.value">
+            <input class="hide" id="volume" type="text" name="volume" value="Not applicable">
+            <output>Volume amount</output>
+        </div>
+        <br>
+        <div id="timerDiv" class="hide">
+            <label for="timer">Timer (minutes)</label>
+            <input type="range" value="Not set / Stop manually" min="0" step="1" max="60"
+                oninput="this.nextElementSibling.value = this.value ; this.nextElementSibling.nextElementSibling.value = this.value + ' minutes'">
+            <input class="hide" id="timer" type="text" name="timer" value="Not applicable">
+            <output>0</output>
+        </div>
+        <br>
+        <div id="percentDiv" class="hide">
+            <label for="percentage">Percent (charge/brightness)</label>
+            <input id="firstPercent" type="range" value="" min="0" step="1" max="100"
+                oninput="this.nextElementSibling.value = this.value ; this.nextElementSibling.nextElementSibling.value = this.value + '%'">
+            <input class="hide" id="percent" type="text" name="percentage" value="Not applicable">
+            <output>Percent</output>
+        </div>
+        <br>
+        <div id="humidityDiv" class="hide">
+            <label for="humidity">Humidity level %</label>
+            <input type="range" value="" min="0" step="1" max="100"
+                oninput="this.nextElementSibling.value = this.value ; this.nextElementSibling.nextElementSibling.value = this.value + '%'">
+            <input class="hide" id="humidity" type="text" name="humidity" value="Not applicable">
+            <output>Humidity</output>
+        </div>
+        <br>
+        <div id="appDiv" class="hide">
+            <label for="app">Start App</label>
+            <div>
+                <label for="app">Netflix</label>
+                <input name="app" type="radio" value="Netflix" />
+                <label for="app">Youtube</label>
+                <input name="app" type="radio" value="Youtube" />
+                <label for="app">Twitch</label>
+                <input name="app" type="radio" value="Twitch" />
+                <label for="app">Spotify</label>
+                <input name="app" type="radio" value="Spotify" />
+                <input class="hide" id="app_na" name="app" type="radio" value="Not applicable" />
+            </div>
+        </div>
+        <br>
+        <div id="channelDiv" class="hide">
+            <label for="channel">Channel</label>
+            <input id="channel" type="text" name="channel" value="1">
+        </div>
+        <br>
+        <input class="submit" type="submit" name="submit" value="Submit" onclick="showOptions();">
+        <br>
+    </form>
+    <div style="padding-top: 20px;">
+        <a  href="/list" ><button>View all the devices</button></a>
+    </div>
+    <section class="footer-dark">
+        <footer>
+            <div class="container">
+                <h4>SmartHome Ltd.</h4>
+                <p class="copyright">Kliment Paskalev © 2022</p>
+            </div>
+        </footer>
+    </section>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <meta name="author" content="SmartHome Ltd.">
+    <script type="text/javascript" src="js/list.js"></script>
+    <title>Device status dashboard</title>
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/add-device">Add device</a></li>
+            <li><a href="/show-device-status">Device status</a></li>
+            <li><a href="/update-device-status">Update device</a></li>
+            <li><a href="/delete-device">Delete device</a></li>
+            <li><a href="/list">View devices</a></li>
+            <li><a href="/search">Search</a></li>
+        </ul>
+    </nav>
+    <!-- If nothing came up from the Search user input, display different message -->
+        <% if (availableDevices.length == 0) { %>
+            <h1>Device not found</h1>
+            <h3>The device name you are looking for has not been connected to your SmartHome system yet.</h3>
+        <% } else { %>
+    <!-- If there is a result from Search, display the device data using the List.html table -->
+    <h1>Device status dashboard</h1>
+    <h3>You can see properties of the chosen device here:</h3>
+    <table >
+        <tbody>
+            <% availableDevices.forEach(function(device){ %>
+            <tr>
+                <th>Device</th>
+                <% if(device.On_Off){ %>
+                    <th>On/Off</th>
+                <% } %>
+                <% if(device.Open_Close && device.Open_Close != "Not applicable" && device.Open_Close != ""){ %>
+                    <th>Open/Close</th>
+                <% } %>
+                <% if(device.temperature && device.temperature != "" && device.temperature != "Not applicable"){ %>
+                    <th>Temperature &#8451;</th>
+                <% } %>
+                <% if(device.volume && device.volume != "" && device.volume != "Not applicable"){ %>
+                    <th>Volume</th>
+                <% } %>
+                <% if(device.timer && device.timer != "Not applicable" && device.timer != ""){ %>
+                    <th>Timer</th>
+                <% } %>
+                <% if(device.humidity && device.humidity != "Not applicable" && device.humidity != ""){ %>
+                    <th>Humidity</th>
+                <% } %>
+                <% if(device.percentage && device.percentage != "Not applicable" && device.percentage != ""){ %>
+                    <th>Percentage (Brightness/Charge)</th>
+                <% } %>
+                <% if(device.app && device.app != "Not applicable" && device.app != ""){ %>
+                    <th>App</th>
+                <% } %>
+                <% if(device.channel && device.channel != "Not applicable" && device.channel != ""){ %>
+                    <th>Channel</th>
+                <% } %>
+            </tr>
+            
+            <tr >
+                <td class="name" data-value="<%= device.name %>">
+                    <%= device.name %>
+                </td>
+
+                <td>
+                    <p >
+                    <% if(device.On_Off){ %>
+                        ON
+                    <% } else{ %>
+                        OFF
+                    <% } %>
+                    </p>
+                </td>
+                
+                <% if(device.Open_Close && device.Open_Close != "Not applicable" && device.Open_Close != ""){ %>
+                <td>
+                    <p><%= device.Open_Close %></p>
+                </td>
+                <% } %>
+
+                <% if(device.temperature && device.temperature != "" && device.temperature != "Not applicable"){ %>
+                <td>
+                    <p><%= device.temperature %> &#8451;</p>
+                </td>
+                <% } %>
+
+                <% if(device.volume && device.volume != "" && device.volume != "Not applicable"){ %>
+                <td>
+                    <p><%= device.volume %></p>
+                </td>
+                <% } %>
+
+                <% if(device.timer && device.timer != "Not applicable" && device.timer != ""){ %>
+                <td>
+                    <p><%= device.timer %> min.</p>
+                </td>
+                <% } %>
+
+                <% if(device.humidity && device.humidity != "Not applicable" && device.humidity != ""){ %>
+                <td>
+                    <p><%= device.humidity %> %</p>
+                </td>
+                <% } %>
+
+                <% if(device.percentage && device.percentage != "Not applicable" && device.percentage != ""){ %>
+                <td>
+                    <p><%= device.percentage %> %</p>
+                </td>
+                <% } %>
+
+                <% if(device.app && device.app != "Not applicable" && device.app != ""){ %>
+                <td>
+                    <p><%= device.app %></p>
+                </td>
+                <% } %>
+
+                <% if(device.channel && device.channel != "Not applicable" && device.channel != ""){ %>
+                <td>
+                    <p><%= device.channel %></p>
+                </td>
+                <% } %>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <% } %>
+    <a class="button" href="/add-device"><button>Add new device</button></a>
+    <script>
+        showStats();
+    </script>
+    <section class="footer-dark">
+        <footer>
+            <div class="container">
+                <h4>SmartHome Ltd.</h4>
+                <p class="copyright">Kliment Paskalev © 2022</p>
+            </div>
+        </footer>
+    </section>
+</body>
+</html>

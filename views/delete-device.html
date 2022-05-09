@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <title>Delete a Device</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript" src="js/form.js"></script>
+    <meta name="author" content="SmartHome Ltd.">
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/add-device">Add device</a></li>
+            <li><a href="/show-device-status">Device status</a></li>
+            <li><a href="/update-device-status">Update device</a></li>
+            <li><a href="/delete-device">Delete device</a></li>
+            <li><a href="/list">View devices</a></li>
+            <li><a href="/search">Search</a></li>
+        </ul>
+    </nav>
+    <H1>Delete a device:</H1>
+    <% if (availableDevices.length != 0) { %>
+        <form action="/deleted" method="GET">
+            <% availableDevices.forEach(function(device){ %>
+            <div>
+                <input type="radio" name="name" value="<%= device.name %>">
+                <label for="name"><%= device.name %></label>
+            </div>
+            <% }) %>
+            <br>
+            <input class="delete" type="submit" value="Delete" onclick="validate();">
+            <br>
+        </form>
+    <% } else { %>
+        <h2>No devices have been added yet.</h2>
+    <% } %>
+    <section class="footer-dark">
+        <footer>
+            <div class="container">
+                <h4>SmartHome Ltd.</h4>
+                <p class="copyright">Kliment Paskalev © 2022</p>
+            </div>
+        </footer>
+    </section>
+</body>
+
+</html>

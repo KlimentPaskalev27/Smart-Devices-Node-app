@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <title>Search page</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <meta name="author" content="SmartHome Ltd.">
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/add-device">Add device</a></li>
+            <li><a href="/show-device-status">Device status</a></li>
+            <li><a href="/update-device-status">Update device</a></li>
+            <li><a href="/delete-device">Delete device</a></li>
+            <li><a href="/list">View devices</a></li>
+            <li><a href="/search">Search</a></li>
+        </ul>
+    </nav>
+    <h1>Search if device is already added</h1>
+    <p>Feel free to browse your local system if you have set up a specific device. Enter the device's name to see if it pops up in the results.</p>
+    <form action="/results" method="GET">
+        <input id="search-box" type="text" name="keyword" value="Refrigerator">
+        <input type="submit" value="Submit" class="submit">
+    </form>
+    <section class="footer-dark">
+        <footer>
+            <div class="container">
+                <h4>SmartHome Ltd.</h4>
+                <p class="copyright">Kliment Paskalev © 2022</p>
+            </div>
+        </footer>
+    </section>
+</body>
+</html>

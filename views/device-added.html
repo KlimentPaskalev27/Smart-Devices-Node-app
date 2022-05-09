@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device has been added</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <meta name="author" content="SmartHome Ltd.">
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/add-device">Add device</a></li>
+            <li><a href="/show-device-status">Device status</a></li>
+            <li><a href="/update-device-status">Update device</a></li>
+            <li><a href="/delete-device">Delete device</a></li>
+            <li><a href="/list">View devices</a></li>
+            <li><a href="/search">Search</a></li>
+        </ul>
+    </nav>
+    <H1>Device has been added!</H1>
+    <h3>This is the new device you just linked to SmartHome</h3>
+    <% availableDevices.forEach(function(device){ %>
+    <ul>
+        <li><%= device.name %></li>
+        <li>
+            <% if(device.On_Off){ %>
+            <p>Turned ON</p>
+            <% } else{ %>
+            <p>Turned OFF</p>
+            <% } %>
+        </li>
+        
+        <li>
+            <% if(device.Open_Close){ %>
+            <p>OPENED</p>
+            <% } else{ %>
+            <p>CLOSED</p>
+            <% } %>
+        </li>
+        
+        <li>
+            <% if(!device.temperature == ""){ %>
+            <%= device.temperature %> &#8451;
+            <% } %>
+        </li>
+        
+        <li><%= device.volume %></li>
+    </ul>
+    <% }) %>
+    <section class="footer-dark">
+        <footer>
+            <div class="container">
+                <h4>SmartHome Ltd.</h4>
+                <p class="copyright">Kliment Paskalev © 2022</p>
+            </div>
+        </footer>
+    </section>
+</body>
+
+</html>
